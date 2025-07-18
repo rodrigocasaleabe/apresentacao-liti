@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liti - Parceria Estratégica B2B2C</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #6B46C1, #2196F3, #FF9800);
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-title {
+            font-size: 3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .slide-subtitle {
+            font-size: 1.4em;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #6B46C1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+            color: white;
+            border-radius: 15px;
+            min-width: 200px;
+            margin: 10px;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefit-item {
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .benefit-item:hover {
+            border-color: #6B46C1;
+            transform: translateY(-3px);
+        }
+
+        .benefit-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            position: relative;
+            min-width: 200px;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #667eea;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+            color: white;
+            border-radius: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #6B46C1;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: 900;
+            color: #6B46C1;
+            margin-bottom: 20px;
+        }
+
+        .partnership-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .partnership-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .company-logo {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            min-width: 200px;
+        }
+
+        .company-logo:hover {
+            transform: translateY(-5px);
+        }
+
+        .partnership-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: white;
+            transform: scale(1.5);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .fullscreen-toggle {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                margin: 10px;
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+            }
+            
+            .process-step::after {
+                display: none;
+            }
+
+            .slide-navigation {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .partnership-logos {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .partnership-connector {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            
+            .slide-navigation,
+            .slide-counter,
+            .fullscreen-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Controles -->
+    <button class="fullscreen-toggle" onclick="toggleFullscreen()" title="Tela Cheia">⛶</button>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Capa -->
+        <div class="slide" id="slide1">
+            <div class="slide-header">
+                <div class="logo">Liti</div>
+                <h1 class="slide-title">Parceria Estratégica B2B2C</h1>
+                <p class="slide-subtitle">Revolucionando o Bem-estar dos seus Colaboradores</p>
+            </div>
+            
+            <div class="partnership-section">
+                <h2 style="color: #2c3e50; margin-bottom: 30px; font-size: 2em; text-align: center;">Uma Parceria de Sucesso</h2>
+                
+                <div class="partnership-logos">
+                    <div class="logo-container">
+                        <div class="company-logo liti-logo">
+                            <span style="font-size: 3em; font-weight: 900; color: #6B46C1;">Liti</span>
+                            <p style="color: #7f8c8d; margin-top: 10px;">Tecnologia em Nutrição</p>
+                        </div>
+                    </div>
+                    
+                    <div class="partnership-connector">
+                        <span style="font-size: 2em; color: #6B46C1;">+</span>
+                    </div>
+                    
+                    <div class="logo-container">
+                        <div class="company-logo cyrela-logo">
+                            <span style="font-size: 3em; font-weight: 900; color: #E31E24;">Cyrela</span>
+                            <p style="color: #7f8c8d; margin-top: 10px;">Líder no Mercado Imobiliário</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problema -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <h1 class="slide-title">O Desafio das Empresas Modernas</h1>
+                <p class="slide-subtitle">Colaboradores mais saudáveis = Empresa mais produtiva</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="card">
+                    <h3>📈 Alto Absenteísmo</h3>
+                    <p>Problemas de saúde relacionados à má alimentação geram ausências frequentes e custos elevados.</p>
+                </div>
+                <div class="card">
+                    <h3>😴 Baixa Produtividade</h3>
+                    <p>Colaboradores com má nutrição apresentam menor energia, foco e rendimento no trabalho.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Custos Crescentes</h3>
+                    <p>Gastos com plano de saúde e medicamentos aumentam com colaboradores não saudáveis.</p>
+                </div>
+                <div class="card">
+                    <h3>🔄 Turnover Elevado</h3>
+                    <p>Falta de cuidado com bem-estar impacta na retenção de talentos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solução Liti -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <h1 class="slide-title">Nossa Solução</h1>
+                <p class="slide-subtitle">Plataforma Digital de Nutrição Personalizada</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🎯 Liti Emagrecimento</h3>
+                    <p>Programa estruturado para perda de peso saudável com acompanhamento nutricional especializado.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Liti Performance</h3>
+                    <p>Otimização nutricional para alta performance física e mental no ambiente de trabalho.</p>
+                </div>
+                <div class="card">
+                    <h3>⚖️ Liti Equilíbrio</h3>
+                    <p>Manutenção de hábitos saudáveis e bem-estar geral para vida equilibrada.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Diferenciais -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <h1 class="slide-title">Nossos Diferenciais</h1>
+                <p class="slide-subtitle">Tecnologia + Ciência + Personalização</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔬</div>
+                    <h3>Metodologia Científica</h3>
+                    <p>Protocolos baseados em evidências clínicas</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Plataforma Digital</h3>
+                    <p>Acesso 24/7 via app</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">👥</div>
+                    <h3>Acompanhamento Personalizado</h3>
+                    <p>Cada colaborador recebe um plano único</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Suporte Contínuo</h3>
+                    <p>Profissionais durante toda a jornada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Benefícios para Empresa -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <h1 class="slide-title">Benefícios para sua Empresa</h1>
+                <p class="slide-subtitle">ROI Comprovado em Saúde e Produtividade</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="card">
+                    <h3>📊 Redução de Custos</h3>
+                    <p>Diminuição de gastos com plano de saúde e medicamentos através da prevenção.</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Aumento de Produtividade</h3>
+                    <p>Colaboradores mais energizados e focados no trabalho.</p>
+                </div>
+                <div class="card">
+                    <h3>💎 Retenção de Talentos</h3>
+                    <p>Benefício diferenciado que demonstra cuidado com o bem-estar.</p>
+                </div>
+                <div class="card">
+                    <h3>🏆 Employer Branding</h3>
+                    <p>Melhoria da imagem da empresa como empregadora inovadora.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Como Funciona -->
+        <div class="slide" id="slide6">
+            <div class="slide-header">
+                <h1 class="slide-title">Como Funciona</h1>
+                <p class="slide-subtitle">Implementação Simples e Eficiente</p>
+            </div>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <h3>1. Apresentação</h3>
+                    <p>Demonstração da plataforma para os colaboradores</p>
+                </div>
+                <div class="process-step">
+                    <h3>2. Adesão</h3>
+                    <p>Colaboradores se inscrevem voluntariamente</p>
+                </div>
+                <div class="process-step">
+                    <h3>3. Avaliação</h3>
+                    <p>Análise personalizada e criação do plano</p>
+                </div>
+                <div class="process-step">
+                    <h3>4. Acompanhamento</h3>
+                    <p>Suporte contínuo e monitoramento</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Modelo de Parceria -->
+        <div class="slide" id="slide7">
+            <div class="slide-header">
+                <h1 class="slide-title">Modelo de Parceria</h1>
+                <p class="slide-subtitle">Flexível e Adaptável às suas Necessidades</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="card">
+                    <h3>💰 Desconto Corporativo</h3>
+                    <p>Condições especiais para todos os colaboradores da empresa.</p>
+                </div>
+                <div class="card">
+                    <h3>📦 Pacotes Personalizados</h3>
+                    <p>Adequamos nossa oferta ao perfil e necessidades da sua equipe.</p>
+                </div>
+                <div class="card">
+                    <h3>📈 Relatórios Gerenciais</h3>
+                    <p>Dados agregados sobre engajamento e resultados (respeitando privacidade).</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Suporte Dedicado</h3>
+                    <p>Canal direto para dúvidas e suporte especializado.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Nosso Momentum -->
+        <div class="slide" id="slide8">
+            <div class="slide-header">
+                <h1 class="slide-title">Nosso Momentum</h1>
+                <p class="slide-subtitle">Crescimento Sustentável e Resultados Comprovados</p>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number">+10k</span>
+                    <span class="stat-label">Pessoas Atendidas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50%</span>
+                    <span class="stat-label">Retenção 12 Meses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">+80</span>
+                    <span class="stat-label">NPS Score</span>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="card">
+                    <h3>🔥 Momento Crítico</h3>
+                    <p>Crescimento acelerado com foco total em eficiência e resultados.</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Investimento em Inovação</h3>
+                    <p>Constante evolução tecnológica e metodológica.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Próximos Passos -->
+        <div class="slide" id="slide9">
+            <div class="slide-header">
+                <h1 class="slide-title">Próximos Passos</h1>
+                <p class="slide-subtitle">Vamos Construir essa Parceria Juntos</p>
+            </div>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <h3>1. Piloto</h3>
+                    <p>Teste com grupo seleto de colaboradores interessados</p>
+                </div>
+                <div class="process-step">
+                    <h3>2. Avaliação</h3>
+                    <p>Análise de resultados e feedback detalhado</p>
+                </div>
+                <div class="process-step">
+                    <h3>3. Expansão</h3>
+                    <p>Implementação para toda a empresa parceira</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>Pronto para Transformar o Bem-estar dos seus Colaboradores?</h2>
+                <p>Vamos agendar uma reunião para estruturar a proposta personalizada!</p>
+                <a href="#" class="cta-button">Vamos Conversar!</a>
+            </div>
+        </div>
+
+        <!-- Slide 10: Contato -->
+        <div class="slide" id="slide10">
+            <div class="slide-header">
+                <h1 class="slide-title">Contato</h1>
+                <p class="slide-subtitle">Estamos prontos para iniciar esta parceria</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>👤 Contato</h3>
+                    <p><strong>Rodrigo Casale Abe</strong></p>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p>rodrigo@litisaude.com.br</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 WhatsApp</h3>
+                    <p>(11) 99813-1558</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🌐 Website</h3>
+                    <p>www.litisaude.com.br</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>Obrigado pela Atenção!</h2>
+                <p>Juntos, vamos criar um ambiente de trabalho mais saudável e produtivo.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <div class="slide-navigation">
+        <div class="nav-dots">
+            <div class="nav-dot active" onclick="scrollToSlide(1)" title="Slide 1"></div>
+            <div class="nav-dot" onclick="scrollToSlide(2)" title="Slide 2"></div>
+            <div class="nav-dot" onclick="scrollToSlide(3)" title="Slide 3"></div>
+            <div class="nav-dot" onclick="scrollToSlide(4)" title="Slide 4"></div>
+            <div class="nav-dot" onclick="scrollToSlide(5)" title="Slide 5"></div>
+            <div class="nav-dot" onclick="scrollToSlide(6)" title="Slide 6"></div>
+            <div class="nav-dot" onclick="scrollToSlide(7)" title="Slide 7"></div>
+            <div class="nav-dot" onclick="scrollToSlide(8)" title="Slide 8"></div>
+            <div class="nav-dot" onclick="scrollToSlide(9)" title="Slide 9"></div>
+            <div class="nav-dot" onclick="scrollToSlide(10)" title="Slide 10"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 1;
+
+        function scrollToSlide(slideNumber) {
+            const slide = document.getElementById('slide' + slideNumber);
+            slide.scrollIntoView({ behavior: 'smooth' });
+            currentSlideIndex = slideNumber;
+            updateNavigation();
+            updateCounter();
+        }
+
+        function updateNavigation() {
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex - 1);
+            });
+        }
+
+        function updateCounter() {
+            document.getElementById('current-slide').textContent = currentSlideIndex;
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Auto-update navigation dots based on scroll
+        window.addEventListener('scroll', () => {
+            const slides = document.querySelectorAll('.slide');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPosition >= slideTop && scrollPosition <= slideBottom) {
+                    currentSlideIndex = index + 1;
+                    updateNavigation();
+                    updateCounter();
+                }
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'Space') {
+                e.preventDefault();
+                if (currentSlideIndex < 10) {
+                    scrollToSlide(currentSlideIndex + 1);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (currentSlideIndex > 1) {
+                    scrollToSlide(currentSlideIndex - 1);
+                }
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                scrollToSlide(1);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                scrollToSlide(10);
+            } else if (e.key === 'F11') {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+        });
+
+        // Initialize
+        document.getElementById('total-slides').textContent = document.querySelectorAll('.slide').length;
+        updateCounter();
+
+        // Add touch/swipe support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const difference = touchStartY - touchEndY;
+
+            if (Math.abs(difference) > swipeThreshold) {
+                if (difference > 0) {
+                    // Swipe up - next slide
+                    if (currentSlideIndex < 10) {
+                        scrollToSlide(currentSlideIndex + 1);
+                    }
+                } else {
+                    // Swipe down - previous slide
+                    if (currentSlideIndex > 1) {
+                        scrollToSlide(currentSlideIndex - 1);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
